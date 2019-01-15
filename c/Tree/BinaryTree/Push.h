@@ -1,0 +1,16 @@
+#ifndef _PUSH_H
+#define _PUSH_H
+Status Push(SqStack &S, SElemType e)
+{
+	if(S.top - S.base >= S.stacksize)
+	{
+		S.base = (SElemType *)realloc( S.base, (S.stacksize + STACKINCREMENT) * sizeof(SElemType));
+		if(!S.base)
+			exit(OVERFLOW);
+		S.top = S.base + S.stacksize;
+		S.stacksize = S.stacksize + STACKINCREMENT;
+	}
+	*S.top++ = e;
+	return OK;
+}
+#endif
